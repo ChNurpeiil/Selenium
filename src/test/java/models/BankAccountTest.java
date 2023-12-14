@@ -1,0 +1,33 @@
+package models;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class BankAccountTest {
+    @Test
+    public void testDeposit(){
+        BankAccount bankAccount = new BankAccount("123",1000.0);
+        bankAccount.deposit(500.0);
+        assertEquals(1500.0,bankAccount.getBalance(), "deposit functionality bug");
+
+    }
+    @Test
+    public void estWithdrawSufficientFund(){
+        BankAccount bankAccount = new BankAccount("1234", 1000.00);
+        boolean actualResult = bankAccount.withdraw(500.00);
+
+        assertTrue(actualResult, "withdraw did not return true");
+        assertEquals(500.00, bankAccount.getBalance(), "withdraw balance mismatch");
+    }
+
+    // test withdraw with insufficient balance
+    @Test
+    public void testWithdrawInSufficientFund() {
+        BankAccount bankAccount = new BankAccount("1234", 100.00);
+        boolean actualResult = bankAccount.withdraw(200.00);
+
+        assertFalse(actualResult, "withdraw with insufficient did not return true");
+        assertEquals(100.00, bankAccount.getBalance(), "withdraw balance mismatch");
+    }
+}
