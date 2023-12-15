@@ -27,6 +27,7 @@ public class BankService {
             }
         }
         return null;
+//        return  new Customer("hello","12", new BankAccount("123",1232));
     }
 
     public BankAccount findAccount(String accountId) {
@@ -42,7 +43,7 @@ public class BankService {
 
 
 
-    public void performTransaction(Transaction transaction){
+    public void performTransaction(Transaction transaction) throws Exception{
         String accountId= transaction.getAccountId();
         BankAccount account = findAccount(accountId);
 
@@ -59,11 +60,14 @@ public class BankService {
                 transactions.add(transaction);
 
             } else {
-                System.out.println("Customer not found");
+                throw new Exception("Customer not found");
+//                System.out.println("Customer not found");
             }
         }
         else {
-            System.out.println("Account not found");
+//            System.out.println("Account not found");
+            throw new Exception("Bank account not found");
+
         }
 
 
