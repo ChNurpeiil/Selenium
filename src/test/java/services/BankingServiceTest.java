@@ -3,8 +3,7 @@ package services;
 import models.BankAccount;
 import models.Customer;
 import models.Transaction;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +11,34 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BankingServiceTest {
+    static BankService bankService;
+    BankAccount bankAccount1;
+    Customer customer1;
+
+    @BeforeAll
+    public static void beforeAll(){
+        bankService = new BankService();
+    }
+
+    //when you see lines of code that are repeating in every single
+    //test within one test class
+    //those lines are good candidates to be moved to hooks
+    //@beforeEach, @beforeAll, @afterEach, @afterAll -> these all called hooks
+
+    @BeforeEach
+    public void setupEachTest(){
+
+        bankAccount1 = new BankAccount("12345",1000.0);
+        customer1 = new Customer("Elon Musk", "x1",bankAccount1);
+
+    }
+    @AfterEach
+    public void cleanUp(){
+        bankService.clearCache();
+    }
     @Test
     public void addNewCustomerTest(){
-        //are pre conditional steps
-        BankService bankService = new BankService();
-        BankAccount bankAccount1 = new BankAccount("12345",1000.0);
-        Customer customer1 = new Customer("Elon Musk", "x1",bankAccount1);
 
-        //this is action test
         bankService.addCustomer(customer1);
 
         List<Customer> expectedListOfCustomers = new ArrayList<>();
@@ -29,11 +48,8 @@ public class BankingServiceTest {
     }
     @Test
     public void findingCustomerTest(){
-        BankService bankService= new BankService();
-        BankAccount bankAccount2 = new BankAccount("12345",1000.0);
-        Customer customer2 = new Customer("Elon Musk", "x1",bankAccount2);
 
-        bankService.addCustomer(customer2);
+        bankService.addCustomer(customer1);
 
         Customer actualResult = bankService.findCustomer("x1");
         Assertions.assertEquals("Elon Musk", actualResult.getName());
@@ -43,11 +59,7 @@ public class BankingServiceTest {
     }
     @Test
     public void findingCustomerWithin1CustomerListTest(){
-        BankService bankService= new BankService();
-        BankAccount bankAccount2 = new BankAccount("12345",1000.0);
-        Customer customer2 = new Customer("Elon Musk", "x1",bankAccount2);
-
-        bankService.addCustomer(customer2);
+        bankService.addCustomer(customer1);
 
         Customer actualResult = bankService.findCustomer("x1");
         Assertions.assertEquals("Elon Musk", actualResult.getName());
@@ -57,11 +69,8 @@ public class BankingServiceTest {
     }
     @Test
     public void findingCustomerThatDoesntExist(){
-        BankService bankService= new BankService();
-        BankAccount bankAccount2 = new BankAccount("12345",1000.0);
-        Customer customer2 = new Customer("Elon Musk", "x1",bankAccount2);
 
-        bankService.addCustomer(customer2);
+        bankService.addCustomer(customer1);
 
         Customer actualResultCustomerObj = bankService.findCustomer("beta123");
         assertNull(actualResultCustomerObj, "finding a customer that doesnt exist should return null");
@@ -70,10 +79,6 @@ public class BankingServiceTest {
 
     @Test
     public void performTransactionWithNullCustomer(){
-        BankService bankService = new BankService();
-
-        BankAccount bankAccount1 = new BankAccount("12345",1000.0);
-        Customer customer1 = new Customer("Elon Musk", "x1",bankAccount1);
 
         Transaction transaction = new Transaction("TXN001", "Deposit", 500, "001", "x1");
 
@@ -88,10 +93,6 @@ public class BankingServiceTest {
     }
     @Test
     public void testPerformDepositTransaction(){
-        BankService bankService = new BankService();
-
-        BankAccount bankAccount1 = new BankAccount("12345",1000.0);
-        Customer customer1 = new Customer("Elon Musk", "x1",bankAccount1);
 
         Transaction transaction = new Transaction("TXN001", "Deposit", 500.0, "12345", "x1");
 
@@ -107,10 +108,6 @@ public class BankingServiceTest {
     }
     @Test
     public void testPerformWithdrawSufficientFunds(){
-        BankService bankService = new BankService();
-
-        BankAccount bankAccount1 = new BankAccount("12345",1000.0);
-        Customer customer1 = new Customer("Elon Musk", "x1",bankAccount1);
 
         Transaction transaction = new Transaction("TXN001", "Withdraw", 300.0, "12345", "x1");
 
@@ -124,10 +121,6 @@ public class BankingServiceTest {
     }
     @Test
     public void testPerformWithdrawInsufficientFunds(){
-        BankService bankService = new BankService();
-
-        BankAccount bankAccount1 = new BankAccount("12345",1000.0);
-        Customer customer1 = new Customer("Elon Musk", "x1",bankAccount1);
 
         Transaction transaction = new Transaction("TXN001", "Withdraw", 1500.0, "12345", "x1");
 

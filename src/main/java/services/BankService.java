@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BankService {
+    //all collections declared as instance variable are called
+    //cache - cache is a short term memory
     private List<Customer> customerList;
     private List<Transaction> transactions;
 
@@ -74,5 +76,9 @@ public class BankService {
     }
     public List<Customer> getCustomerList() {
         return customerList;
+    }
+    public void  clearCache(){
+        customerList.clear();
+        transactions.clear();
     }
 }
