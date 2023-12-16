@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!--this is a comment section -->
-<book category="fiction" class="biography">
-    <author>Walter Issakson</author>
-    <title>Leonardo Davinci</title>
-    <year>2014</year>
-</book>

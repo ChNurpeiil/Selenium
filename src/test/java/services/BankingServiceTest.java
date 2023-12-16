@@ -34,6 +34,9 @@ public class BankingServiceTest {
     }
     @AfterEach
     public void cleanUp(){
+        //start every test from empty cache.
+        //so that it ensures each test are starting from of app's default state
+        //and each test is independent
         bankService.clearCache();
     }
     @Test
