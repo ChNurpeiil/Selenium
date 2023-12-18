@@ -1,0 +1,24 @@
+
+
+Maven phases:
+when you run any of the maven goals - all goals prior to the goal you are running are gonna be executed first
+
+in order to execute a phase, each preading phases must pass.
+1. clean - is going to clean the folder which contains all of the previously built code.
+2. validate - checks if all the required info is there
+3. compile - compile all the java files into bytecode.
+4. test - run unit tests
+5. package - packages you project into a desires executable file. in .jar, .war and add into
+target folder
+.jar files are used for creating library projects, and backend java apps . war files is used to create
+web apps.
+6. install - pushes the jar file from target folder to .m2 local repo.
+7. deploy - This phase deploys the final package to a remote repository, making it available to other developers or projects.
+8. verify - runs tests against the package code
+Target Folder:
+Target folder contains all the compiles code(component test) - but you have to built and write
+//component tests. it's usually not a common practice to write component tests in dev source code
+
+
+how to skip test?
+mvn package -DskipTests //--> we can change package or phase ets.
