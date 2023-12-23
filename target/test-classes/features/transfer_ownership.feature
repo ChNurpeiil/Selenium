@@ -2,6 +2,7 @@ Feature: Transfer ownership
  As a user,
   I want to transfer ownership of an account
   In order to assign a new owner to the account
+@regression
   Scenario: Transfer Ownership of Account Scenario
     Given an account with ID 12345 exists
     And the account has a current owner

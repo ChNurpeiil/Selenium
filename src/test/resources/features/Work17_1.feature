@@ -4,7 +4,7 @@ Feature: Optimizing Scenarios with Background
   Background:
     Given the customer is on the shopping website
     And the customer is logged in
-
+@smoke
   Scenario: Positive Shopping Experience with Shipping
 
     And the customer puts the item "Product A" into the cart with quantity 2
@@ -12,14 +12,14 @@ Feature: Optimizing Scenarios with Background
     And the customer enters shipping information
     And the customer makes a payment with a total price of $50.00
     Then the customer receives an order confirmation for shipping
-
+@regression
   Scenario: Positive Shopping Experience with Pickup
 
     And the customer puts the item "Product B" into the cart with quantity 1
     When the customer proceeds to checkout with pickup at "London, UK"
     And the customer makes a payment with a total price of $25.00
     Then the customer receives an order confirmation for pickup
-
+@ignore
   Scenario: Negative Shopping Experience with No Card
 
     And the customer puts the item "Product C" into the cart with quantity 1
