@@ -28,12 +28,28 @@ public class Iframe {
         //after this point all driver.findElement calls will be looking for
         //the element in the iframe
 
-        driver.switchTo().frame(iframe1);
+
+        // this one way
+//        driver.switchTo().frame(iframe1);
+
+
+        //this another way
+//        driver.switchTo().frame(0);
+
+
+        //this also another way
+        driver.switchTo().frame("frame1");
 
 
         WebElement header1 = driver.findElement(By.xpath("//h1"));
         System.out.println(header1.getText());
 
+
+        driver.switchTo().parentFrame();
+
+
+        WebElement alertPage = driver.findElement(By.id("alerts_page"));
+        alertPage.click();
 
 
 
