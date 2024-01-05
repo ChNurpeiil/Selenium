@@ -1,6 +1,7 @@
 package steps;
 
 import io.cucumber.java.DataTableType;
+import models.AccountCard;
 import models.Claim;
 import models.Order;
 
@@ -46,4 +47,18 @@ public class DatatableTransformer {
 
 
     }
+
+        @DataTableType
+    public AccountCard accountCardEntry(Map<String, String> entry){
+        String accountName = entry.get("accountName");
+        String accountType = entry.get("accountType");
+        String ownership = entry.get("ownership");
+        long accountNumber = Long.valueOf(entry.get("accountNumber"));
+        String interestRate = entry.get("interestRate");
+        double balance = Double.parseDouble(entry.get("balance"));
+
+        return new AccountCard(accountName, accountType, ownership, accountNumber, interestRate, balance);
+
+
+        }
 }
