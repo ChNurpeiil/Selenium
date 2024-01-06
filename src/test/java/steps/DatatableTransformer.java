@@ -1,10 +1,8 @@
 package steps;
 
 import io.cucumber.java.DataTableType;
-import models.AccountCard;
-import models.Claim;
-import models.Order;
-import models.BankTransaction;
+import models.*;
+
 import java.util.Map;
 
 public class DatatableTransformer {
@@ -19,7 +17,7 @@ public class DatatableTransformer {
 
 
     @DataTableType
-    public Claim claimEntry(Map<String, String> entry){
+    public Claim claimEntry(Map<String, String> entry) {
 
         String claimId = entry.get("claimId");
         double amount = Double.valueOf(entry.get("amount"));
@@ -27,12 +25,12 @@ public class DatatableTransformer {
         String description = entry.get("description");
         String supportingDocuments = entry.get("supportingDocuments");
 
-        return  new Claim(amount, date, description, supportingDocuments);
+        return new Claim(amount, date, description, supportingDocuments);
 
     }
 
     @DataTableType
-    public Order orderEntry(Map<String, String> entry){
+    public Order orderEntry(Map<String, String> entry) {
         String customerName = entry.get("customerName");
         String address = entry.get("address");
         String productName = entry.get("productName");
@@ -48,8 +46,8 @@ public class DatatableTransformer {
 
     }
 
-        @DataTableType
-    public AccountCard accountCardEntry(Map<String, String> entry){
+    @DataTableType
+    public AccountCard accountCardEntry(Map<String, String> entry) {
         String accountName = entry.get("accountName");
         String accountType = entry.get("accountType");
         String ownership = entry.get("ownership");
@@ -60,10 +58,10 @@ public class DatatableTransformer {
         return new AccountCard(accountName, accountType, ownership, accountNumber, interestRate, balance);
 
 
-        }
+    }
 
-        @DataTableType
-    public BankTransaction transactionEntry(Map<String, String> entry){
+    @DataTableType
+    public BankTransaction transactionEntry(Map<String, String> entry) {
         String date = entry.get("date");
         String category = entry.get("category");
         String description = entry.get("description");
@@ -72,5 +70,15 @@ public class DatatableTransformer {
 
         return new BankTransaction(date, category, description, amount, balance);
 
-        }
+    }
+
+    @DataTableType
+    public NewCheckingAccountInfo newCheckingAccountInfoEntry(Map<String, String> entry) {
+        String checkingAccountType = entry.get("checkingAccountType");
+        String ownership = entry.get("accountOwnership");
+        String accountNumber =entry.get("accountName");
+        double initialDepositAmount = Double.parseDouble(entry.get("initialDepositAmount"));
+
+        return new  NewCheckingAccountInfo(checkingAccountType, ownership, accountNumber,initialDepositAmount );
+    }
 }

@@ -1,6 +1,7 @@
 package steps;
 
 import com.github.dockerjava.api.model.Link;
+import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -8,6 +9,7 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import models.AccountCard;
 import models.BankTransaction;
+import models.NewCheckingAccountInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,7 +29,9 @@ public class CheckingAccountSteps {
 
     WebDriver driver = new FirefoxDriver();
 
-    @Given("the user is on dbank homepage")
+
+//    @Given("the user is on dbank homepage")
+    @Before
     public void the_user_is_on_dbank_homepage() {
 
         driver.get("https://dbank-qa.wedevx.co/bank/login");
@@ -46,55 +50,95 @@ public class CheckingAccountSteps {
 
     }
 
-    @Given("the user clicks on the  checking button")
-    public void the_user_clicks_on_the_checking_button() {
+//    @Given("the user clicks on the  checking button")
+//    public void the_user_clicks_on_the_checking_button() {
+//        WebElement checkingMenu = driver.findElement(By.id("checking-menu"));
+//        checkingMenu.click();
+//
+//
+//    }
+//
+//    @Given("the user clicks new checking button")
+//    public void the_user_clicks_new_checking_button() {
+//        WebElement newCheckingBtn = driver.findElement(By.id("new-checking-menu-item"));
+//        newCheckingBtn.click();
+//
+//        String expectedUrl = "https://dbank-qa.wedevx.co/bank/account/checking-add";
+//        assertEquals(expectedUrl, driver.getCurrentUrl(), "new checking Button didn't take to the url" + expectedUrl);
+//
+//    }
+//
+//    @When("the user selects {string} Account type")
+//    public void the_user_selects_account_type(String idOfRadioBtn) {
+//        WebElement accountTypeRadioBtn = driver.findElement(By.id(idOfRadioBtn));
+//        accountTypeRadioBtn.click();
+//
+//    }
+//
+//    @When("the user select {string} Account Ownership")
+//    public void the_user_select_account_ownership(String ownershipTypeRadioBtnId) {
+//        WebElement ownershipRadioBtn = driver.findElement(By.id(ownershipTypeRadioBtnId));
+//        ownershipRadioBtn.click();
+//    }
+//
+//    @When("the user names the account {string}")
+//    public void the_user_names_the_account(String accountName) {
+//        WebElement accountNameTxt = driver.findElement(By.id("name"));
+//        accountNameTxt.sendKeys(accountName);
+//    }
+//
+//    @When("the user makes the initial deposit of ${double}")
+//    public void the_user_makes_the_initial_deposit_of_$(Double openingBalance) {
+//        WebElement openingBalanceTxtBox = driver.findElement(By.id("openingBalance"));
+//        openingBalanceTxtBox.sendKeys(String.valueOf(openingBalance));
+//
+//    }
+//
+//    @When("the user clicks on submit")
+//    public void the_user_clicks_on_submit() {
+//        WebElement submit = driver.findElement(By.id("newCheckingSubmit"));
+//        submit.click();
+//    }
+
+    @When("the user creates a new checking account with the following date")
+    public void the_user_creates_a_new_checking_account_with_the_following_date(List<NewCheckingAccountInfo> checkingAccountInfoList) {
+        NewCheckingAccountInfo testDataForOneCheckingAccount = checkingAccountInfoList.get(0);
+       //user click on checking button
         WebElement checkingMenu = driver.findElement(By.id("checking-menu"));
         checkingMenu.click();
 
-
-    }
-
-    @Given("the user clicks new checking button")
-    public void the_user_clicks_new_checking_button() {
+        //the user click on the new checking button
         WebElement newCheckingBtn = driver.findElement(By.id("new-checking-menu-item"));
         newCheckingBtn.click();
 
         String expectedUrl = "https://dbank-qa.wedevx.co/bank/account/checking-add";
         assertEquals(expectedUrl, driver.getCurrentUrl(), "new checking Button didn't take to the url" + expectedUrl);
 
-    }
 
-    @When("the user selects {string} Account type")
-    public void the_user_selects_account_type(String idOfRadioBtn) {
-        WebElement accountTypeRadioBtn = driver.findElement(By.id(idOfRadioBtn));
+        //the user selects the account type
+
+        WebElement accountTypeRadioBtn = driver.findElement(By.id(testDataForOneCheckingAccount.getCheckingAccountType()));
         accountTypeRadioBtn.click();
 
-    }
-
-    @When("the user select {string} Account Ownership")
-    public void the_user_select_account_ownership(String ownershipTypeRadioBtnId) {
-        WebElement ownershipRadioBtn = driver.findElement(By.id(ownershipTypeRadioBtnId));
+        //the user selects ownership
+        WebElement ownershipRadioBtn = driver.findElement(By.id(testDataForOneCheckingAccount.getAccountOwnership()));
         ownershipRadioBtn.click();
-    }
 
-    @When("the user names the account {string}")
-    public void the_user_names_the_account(String accountName) {
+
+        //the user names the account
         WebElement accountNameTxt = driver.findElement(By.id("name"));
-        accountNameTxt.sendKeys(accountName);
-    }
+        accountNameTxt.sendKeys(testDataForOneCheckingAccount.getAccountName());
 
-    @When("the user makes the initial deposit of ${double}")
-    public void the_user_makes_the_initial_deposit_of_$(Double openingBalance) {
+        //the user makes the initial deposit
         WebElement openingBalanceTxtBox = driver.findElement(By.id("openingBalance"));
-        openingBalanceTxtBox.sendKeys(String.valueOf(openingBalance));
+        openingBalanceTxtBox.sendKeys(String.valueOf(testDataForOneCheckingAccount.getInitialDeposit()));
 
-    }
 
-    @When("the user clicks on submit")
-    public void the_user_clicks_on_submit() {
+        //the user click on the submit button
         WebElement submit = driver.findElement(By.id("newCheckingSubmit"));
         submit.click();
     }
+
 
     @Then("the user should see the green {string}")
     public void the_user_should_see_the_green(String expectedConfMessage) {

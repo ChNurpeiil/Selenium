@@ -30,7 +30,7 @@ public class HW18_3_1ChangingPasswordSteps {
 //        WebElement currentPassword = new WebDriverWait(driver, 10)
 //                .until(ExpectedConditions.elementToBeClickable(By.id("currentPassword")));
 //        currentPassword.sendKeys("124578N12ch");
-        WebElement currentPassword = driver.findElement(By.id("currentPassword"));
+        WebElement currentPassword = driver.findElement(By.name("currentPassword"));
         currentPassword.sendKeys("124578N12ch");
 
     }
