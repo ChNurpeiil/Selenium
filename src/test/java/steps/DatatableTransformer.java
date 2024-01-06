@@ -4,7 +4,7 @@ import io.cucumber.java.DataTableType;
 import models.AccountCard;
 import models.Claim;
 import models.Order;
-
+import models.BankTransaction;
 import java.util.Map;
 
 public class DatatableTransformer {
@@ -59,6 +59,18 @@ public class DatatableTransformer {
 
         return new AccountCard(accountName, accountType, ownership, accountNumber, interestRate, balance);
 
+
+        }
+
+        @DataTableType
+    public BankTransaction transactionEntry(Map<String, String> entry){
+        String date = entry.get("date");
+        String category = entry.get("category");
+        String description = entry.get("description");
+        double amount = Double.parseDouble(entry.get("amount"));
+        double balance = Double.parseDouble(entry.get("balance"));
+
+        return new BankTransaction(date, category, description, amount, balance);
 
         }
 }

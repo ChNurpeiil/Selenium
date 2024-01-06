@@ -3,7 +3,7 @@ Feature: HW18
   Scenario: Update profile negative case
     Given go to login page
     And login into the app
-    Then navigate user to the Update Profile page by hitting profile picture and selecting "My profile"
+    Then navigate user to the Update Profile page by hitting profile picture and selecting "My Profile"
     And full wrong format like phone or region or postal code
     And empty required fields
     And reset the title

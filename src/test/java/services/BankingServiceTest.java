@@ -2,6 +2,7 @@ package services;
 
 import models.BankAccount;
 import models.Customer;
+import models.BankTransaction;
 import models.Transaction;
 import org.junit.jupiter.api.*;
 

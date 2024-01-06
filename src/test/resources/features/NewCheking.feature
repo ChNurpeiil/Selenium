@@ -16,6 +16,6 @@ Feature: Creating a new checking account
       | Nur second checking | Standard Checking | Individual | 486133924     | 0.0%         | 100000.00 |
     And the user should see the following transactions
       | date             | category | description               | amount     | balance    |
-      | 2024-01-03 05:28 | Income   | 845325145 (DPT) - Deposit | $100000.00 | $100000.00 |
+      | 2024-01-03 05:28 | Income   | 845325145 (DPT) - Deposit | 100000.0 | 100000.0 |
 
 

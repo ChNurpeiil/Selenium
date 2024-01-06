@@ -49,7 +49,7 @@ public class HW18_2_2UpdateProfileSteps {
     public void navigate_user_to_the_update_profile_page_by_hitting_profile_picture_and_selecting(String profile) {
         WebElement avatar = driver.findElement(By.xpath("//img[@class='user-avatar rounded-circle']"));
         avatar.click();
-        WebElement myProfile = driver.findElement(By.xpath("(//a[@class='nav-link'])[1]"));
+        WebElement myProfile = driver.findElement(By.xpath("//a[contains(text(), '" + profile + "')]"));
         myProfile.click();
 
     }
