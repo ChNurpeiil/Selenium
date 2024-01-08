@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import pages.LoginPage;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -21,13 +22,13 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CheckingAccountSteps {
-
+    WebDriver driver = new FirefoxDriver();
+    private LoginPage loginPage = new LoginPage(driver);
     @BeforeAll
     public static void setUp() {
         WebDriverManager.firefoxdriver().setup();
     }
 
-    WebDriver driver = new FirefoxDriver();
 
 
 //    @Given("the user is on dbank homepage")
@@ -40,13 +41,16 @@ public class CheckingAccountSteps {
 
     @Given("the user logged in as {string} {string}")
     public void the_user_logged_in_as(String username, String password) {
-        WebElement usernameTxt = driver.findElement(By.id("username"));
-        WebElement passwordTxt = driver.findElement(By.id("password"));
-        WebElement submitBtn = driver.findElement(By.id("submit"));
 
-        usernameTxt.sendKeys(username);
-        passwordTxt.sendKeys(password);
-        submitBtn.click();
+        loginPage.login(username, password);
+
+//        WebElement usernameTxt = driver.findElement(By.id("username"));
+//        WebElement passwordTxt = driver.findElement(By.id("password"));
+//        WebElement submitBtn = driver.findElement(By.id("submit"));
+//
+//        usernameTxt.sendKeys(username);
+//        passwordTxt.sendKeys(password);
+//        submitBtn.click();
 
     }
 

@@ -1,5 +1,6 @@
 package steps.stepdefinitions;
 
+import hwPages.Registration;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,12 +14,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class HW18_2_1Steps {
+    WebDriver driver = new FirefoxDriver();
+    private  Registration registration = new Registration(driver);
+
     @BeforeAll
     public static void setUp(){
         WebDriverManager.firefoxdriver().setup();
 
     }
-    WebDriver driver = new FirefoxDriver();
 
     @Given("the user go to login page")
     public void the_user_go_to_login_page() {
@@ -27,42 +30,44 @@ public class HW18_2_1Steps {
     }
     @Given("the user navigate to sign in page and register a new user")
     public void the_user_navigate_to_sign_in_page_and_register_a_new_user() {
-        WebElement signUp = driver.findElement(By.xpath("//a[contains(text(),'Sign Up Here')]"));
-        signUp.click();
+        registration.signIn();
 
-        WebElement pleaseSelect = driver.findElement(By.id("title"));
-        pleaseSelect.click();
-
-        Select select = new Select(pleaseSelect);
-        select.selectByIndex(2);
-
-        WebElement firstName = driver.findElement(By.id("firstName"));
-        firstName.sendKeys("Sakina");
-        WebElement lastName = driver.findElement(By.id("lastName"));
-        lastName.sendKeys("Saki");
-        WebElement gender = driver.findElement(By.xpath("//input[@value='F']"));
-        gender.click();
-        WebElement dob = driver.findElement(By.id("dob"));
-        dob.sendKeys("12/12/2000");
-        WebElement ssn = driver.findElement(By.id("ssn"));
-        ssn.sendKeys("569-45-9809");
-        WebElement emailAddress = driver.findElement(By.id("emailAddress"));
-        emailAddress.sendKeys("saki@gmail.com");
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys("124578N12ch");
-        WebElement confirmPassword = driver.findElement(By.id("confirmPassword"));
-        confirmPassword.sendKeys("124578N12ch");
-        WebElement nextBtn = driver.findElement(By.xpath("//button[@type='submit']"));
-        nextBtn.click();
-
-        driver.findElement(By.id("address")).sendKeys(" 123 bfhslurjg");
-        driver.findElement(By.id("locality")).sendKeys("Karakol");
-        driver.findElement(By.id("region")).sendKeys("SA");
-        driver.findElement(By.id("postalCode")).sendKeys("23539");
-        driver.findElement(By.id("country")).sendKeys("China");
-        driver.findElement(By.id("homePhone")).sendKeys("(700)552-5453");
-        driver.findElement(By.id("agree-terms")).click();
-        driver.findElement(By.xpath("//button[contains(text(),'Register')]")).click();
+//        WebElement signUp = driver.findElement(By.xpath("//a[contains(text(),'Sign Up Here')]"));
+//        signUp.click();
+//
+//        WebElement pleaseSelect = driver.findElement(By.id("title"));
+//        pleaseSelect.click();
+//
+//        Select select = new Select(pleaseSelect);
+//        select.selectByIndex(2);
+//
+//        WebElement firstName = driver.findElement(By.id("firstName"));
+//        firstName.sendKeys("Sakina");
+//        WebElement lastName = driver.findElement(By.id("lastName"));
+//        lastName.sendKeys("Saki");
+//        WebElement gender = driver.findElement(By.xpath("//input[@value='F']"));
+//        gender.click();
+//        WebElement dob = driver.findElement(By.id("dob"));
+//        dob.sendKeys("12/12/2000");
+//        WebElement ssn = driver.findElement(By.id("ssn"));
+//        ssn.sendKeys("569-45-9809");
+//        WebElement emailAddress = driver.findElement(By.id("emailAddress"));
+//        emailAddress.sendKeys("saki@gmail.com");
+//        WebElement password = driver.findElement(By.id("password"));
+//        password.sendKeys("124578N12ch");
+//        WebElement confirmPassword = driver.findElement(By.id("confirmPassword"));
+//        confirmPassword.sendKeys("124578N12ch");
+//        WebElement nextBtn = driver.findElement(By.xpath("//button[@type='submit']"));
+//        nextBtn.click();
+//
+//        driver.findElement(By.id("address")).sendKeys(" 123 bfhslurjg");
+//        driver.findElement(By.id("locality")).sendKeys("Karakol");
+//        driver.findElement(By.id("region")).sendKeys("SA");
+//        driver.findElement(By.id("postalCode")).sendKeys("23539");
+//        driver.findElement(By.id("country")).sendKeys("China");
+//        driver.findElement(By.id("homePhone")).sendKeys("(700)552-5453");
+//        driver.findElement(By.id("agree-terms")).click();
+//        driver.findElement(By.xpath("//button[contains(text(),'Register')]")).click();
 
     }
     @Given("once done, login into the app")
